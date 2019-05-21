@@ -132,3 +132,7 @@ controller.hears(['I\'m hungry', 'i\'m hungry', 'Im hungry'], ['direct_message',
     });
   });
 });
+
+controller.on('outgoing_webhook', (bot, message) => {
+  bot.replyPublic(message, 'I\'m not sleeping!');
+});
