@@ -14,30 +14,6 @@ dotenv.config({ silent: true });
 // initialize
 const app = express();
 
-// enable/disable cross origin resource sharing if necessary
-app.use(cors());
-
-// enable/disable http request logging
-app.use(morgan('dev'));
-
-// enable only if you want templating
-app.set('view engine', 'ejs');
-
-// enable only if you want static assets from folder static
-app.use(express.static('static'));
-
-// this just allows us to render ejs from the ../app/views directory
-app.set('views', path.join(__dirname, '../src/views'));
-
-// enable json message body for posting data to API
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
-
-
-// default index route
-app.get('/', (req, res) => {
-  res.send('hi');
-});
 
 // START THE SERVER
 // =============================================================================
@@ -130,4 +106,30 @@ controller.hears(['I\'m hungry', 'i\'m hungry', 'Im hungry'], ['direct_message',
 
 controller.on('outgoing_webhook', (bot, message) => {
   bot.replyPublic(message, 'I\'m not sleeping!');
+});
+
+
+// enable/disable cross origin resource sharing if necessary
+app.use(cors());
+
+// enable/disable http request logging
+app.use(morgan('dev'));
+
+// enable only if you want templating
+app.set('view engine', 'ejs');
+
+// enable only if you want static assets from folder static
+app.use(express.static('static'));
+
+// this just allows us to render ejs from the ../app/views directory
+app.set('views', path.join(__dirname, '../src/views'));
+
+// enable json message body for posting data to API
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+
+// default index route
+app.get('/', (req, res) => {
+  res.send('hi');
 });
